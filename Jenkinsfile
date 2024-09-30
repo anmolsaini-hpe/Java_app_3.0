@@ -73,6 +73,15 @@ pipeline{
                }
             }
         }
+        stage('Jfrog : Artifacts'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   curl -X PUT -u admin:Welcome@123 -T /var/lib/jenkins/workspace/Demo/target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar http://54.86.52.190:8082/artifactory/libs-release-local/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar
+               }
+            }
+        }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
